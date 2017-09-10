@@ -6,4 +6,4 @@ export ALSA_CONFIG_PATH=$SNAP/usr/share/alsa/alsa.conf
 export XDG_RUNTIME_DIR=$SNAP_USER_DATA/.tmp
 mkdir -p $XDG_RUNTIME_DIR
 
-exec "$SNAP/dist/n0name-linux-x64/n0namE" "$@"
+exec "$SNAP/dist/n0name-linux-x64/n0name" "$@"
