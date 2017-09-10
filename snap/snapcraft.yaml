@@ -1,15 +1,14 @@
 name: n0name
-version: '0.0'
-summary: A better WeChat on macOS and Linux. Built with Electron.
+version: '0.1'
+summary: A better Reader on macOS and Linux. Built with Electron.
 description: |
-  Electronic WeChat is a unoffical WeChat client. A better WeChat on
-  macOS and Linux. Built with Electron.
+    better Reader with color highlight
 
-grade: stable # must be 'stable' to release into candidate/stable channels
+grade: devel # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
-  electronic-wechat:
+  n0name:
     command: desktop-launch $SNAP/n0name.wrapper
     plugs:
       - unity7
@@ -23,10 +22,10 @@ apps:
       - alsa
 
 parts:
-  electronic-wechat:
+  n0name:
     plugin: nodejs
     source-type: git
-    source: https://github.com/ciiiii/snap-electron-reader.git
+    source: https://github.com/ciiiii/n0name.git
     source-branch: production
     npm-run:
       - build:linux
@@ -75,5 +74,4 @@ parts:
       - n0name.wrapper
     after: 
       - n0name
-      - desktop-gtk2
       - file-copy
