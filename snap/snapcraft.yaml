@@ -9,7 +9,8 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 
 apps:
   n0name:
-    command: desktop-launch $SNAP/n0name.wrapper
+    # command: desktop-launch $SNAP/n0name.wrapper
+    command: npm start
     plugs:
       - unity7
       - opengl
@@ -25,53 +26,12 @@ parts:
   n0name:
     plugin: nodejs
     source-type: git
-    source: https://github.com/ciiiii/n0name.git
-    source-branch: production
-    npm-run:
-      - build:linux
-    install: cp -r dist $SNAPCRAFT_PART_INSTALL
+    source: https://github.com/ciiiii/snap-electron-reader
+    source-branch: master
+    node-packages:
+      - electron
     stage-packages:
       - libnss3
       - fontconfig-config
       - gnome-themes-standard
       - fonts-wqy-microhei
-      - fcitx-frontend-gtk2
-      - overlay-scrollbar-gtk2
-      - libatk-adaptor
-      - libcanberra-gtk-module
-      - libappindicator1
-      - libnotify4
-      - libdbusmenu-glib4
-      - libgconf-2-4
-      - libxss1
-      - gstreamer1.0-plugins-bad
-      - gstreamer1.0-plugins-ugly
-      - gstreamer1.0-plugins-good
-      - gstreamer1.0-plugins-bad-videoparsers
-      - gstreamer1.0-plugins-bad-faad
-      - libasound2
-      - libasound2-data
-      - libsoundtouch1
-      - alsa-utils
-    filesets:
-      no-easy-install-files:
-        - -usr/sbin/update-icon-caches
-        - -README.md
-        - -LICENSE
-    stage:
-      - $no-easy-install-files
-    prime:
-      - $no-easy-install-files
-
-  file-copy:
-    plugin: dump
-    source: snap/files/
-
-  wechat-copy:
-    plugin: dump
-    source: .
-    stage:
-      - n0name.wrapper
-    after: 
-      - n0name
-      - file-copy
