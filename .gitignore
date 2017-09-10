@@ -1,0 +1,13 @@
+# snapcraft
+parts
+stage
+prime
+*.snap
+
+# vim
+.*.swp
+
+# python
+__pycache__
+*.pyc
+.ropeproject

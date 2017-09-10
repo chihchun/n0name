@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=n0name
+Comment=A better WeChat on macOS and Linux. Built with Electron.
+GenericName=n0name
+Name[zh_CN]=未定名
+Comment[zh_CN]=未定名
+GenericName[zh_CN]=未定名
+Terminal=false
+Type=Application
+StartupNotify=true
+StartupWMClass=n0name
+Categories=Network;
+Version=2.0
+Keywords=n0name
+Icon=${SNAP}/meta/gui/icon.png
+Exec=n0name %U

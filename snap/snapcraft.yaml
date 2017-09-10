@@ -1,0 +1,79 @@
+name: n0name
+version: '0.0'
+summary: A better WeChat on macOS and Linux. Built with Electron.
+description: |
+  Electronic WeChat is a unoffical WeChat client. A better WeChat on
+  macOS and Linux. Built with Electron.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+apps:
+  electronic-wechat:
+    command: desktop-launch $SNAP/n0name.wrapper
+    plugs:
+      - unity7
+      - opengl
+      - network
+      - home
+      - browser-support
+      - gsettings
+      - x11
+      - pulseaudio
+      - alsa
+
+parts:
+  electronic-wechat:
+    plugin: nodejs
+    source-type: git
+    source: https://github.com/ciiiii/snap-electron-reader.git
+    source-branch: production
+    npm-run:
+      - build:linux
+    install: cp -r dist $SNAPCRAFT_PART_INSTALL
+    stage-packages:
+      - libnss3
+      - fontconfig-config
+      - gnome-themes-standard
+      - fonts-wqy-microhei
+      - fcitx-frontend-gtk2
+      - overlay-scrollbar-gtk2
+      - libatk-adaptor
+      - libcanberra-gtk-module
+      - libappindicator1
+      - libnotify4
+      - libdbusmenu-glib4
+      - libgconf-2-4
+      - libxss1
+      - gstreamer1.0-plugins-bad
+      - gstreamer1.0-plugins-ugly
+      - gstreamer1.0-plugins-good
+      - gstreamer1.0-plugins-bad-videoparsers
+      - gstreamer1.0-plugins-bad-faad
+      - libasound2
+      - libasound2-data
+      - libsoundtouch1
+      - alsa-utils
+    filesets:
+      no-easy-install-files:
+        - -usr/sbin/update-icon-caches
+        - -README.md
+        - -LICENSE
+    stage:
+      - $no-easy-install-files
+    prime:
+      - $no-easy-install-files
+
+  file-copy:
+    plugin: dump
+    source: snap/files/
+
+  wechat-copy:
+    plugin: dump
+    source: .
+    stage:
+      - n0name.wrapper
+    after: 
+      - n0name
+      - desktop-gtk2
+      - file-copy
